@@ -29,20 +29,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
-
+  
   // Check if user is already logged in
   useEffect(() => {
-    const storedUser = localStorage.getItem('karate_user');
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (e) {
-        console.error("Failed to parse stored user data");
-        localStorage.removeItem('karate_user');
+    const checkAuth = async () => {
+      setIsLoading(true);
+      const storedUser = localStorage.getItem('karate_user');
+      
+      if (storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch (e) {
+          console.error("Failed to parse stored user data");
+          localStorage.removeItem('karate_user');
+        }
       }
-    }
-    setIsLoading(false);
+      
+      setIsLoading(false);
+    };
+    
+    checkAuth();
   }, []);
 
   // Login function
@@ -68,7 +74,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     setUser(null);
     localStorage.removeItem('karate_user');
-    navigate('/');
   };
 
   const value = {
