@@ -1,5 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import ScoringPanel from "@/components/scoring/ScoringPanel";
 
 const Scoring = () => {
   return (
@@ -16,13 +17,8 @@ const Scoring = () => {
             Record points and penalties during live matches
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex items-center justify-center p-12">
-          <div className="text-center">
-            <h3 className="text-lg font-medium mb-2">Coming Soon</h3>
-            <p className="text-karate-gray max-w-md">
-              The real-time scoring system is under development. Check back soon for updates.
-            </p>
-          </div>
+        <CardContent>
+          <ScoringPanel matchId="current-match" />
         </CardContent>
       </Card>
     </div>
