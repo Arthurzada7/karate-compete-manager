@@ -69,9 +69,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-karate-light-gray">
+    <div className="min-h-screen bg-karate-light-gray flex">
       {/* Mobile Header */}
-      <header className="lg:hidden flex items-center justify-between bg-white p-4 shadow-sm">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-white p-4 shadow-sm">
         <Button 
           variant="ghost" 
           size="icon" 
@@ -88,7 +88,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         </Avatar>
       </header>
 
-      {/* Sidebar - Mobile (Overlay) */}
+      {/* Overlay for mobile */}
       {isSidebarOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -96,10 +96,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         />
       )}
 
-      <div 
+      {/* Sidebar */}
+      <aside 
         className={cn(
-          "fixed top-0 left-0 z-50 h-full w-64 bg-white shadow-lg transition-transform lg:relative lg:translate-x-0",
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          "fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-white shadow-lg transition-transform lg:translate-x-0",
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex flex-col h-full">
@@ -154,17 +155,17 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             </Button>
           </div>
         </div>
-      </div>
+      </aside>
 
       {/* Main Content */}
-      <div className={cn(
-        "flex-1 transition-all",
-        isSidebarOpen ? "lg:ml-64" : "",
+      <main className={cn(
+        "flex-1 transition-all pt-[73px] lg:pt-0",
+        "min-h-screen overflow-auto"
       )}>
-        <main className="p-4 md:p-6 lg:p-8">
+        <div className="p-4 md:p-6 lg:p-8">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
