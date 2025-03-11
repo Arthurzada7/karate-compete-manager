@@ -48,29 +48,34 @@ const ScoringPanel: React.FC<ScoringPanelProps> = ({ matchId, onScoreUpdate }) =
     });
   };
 
+  const competitors = [
+    { data: competitor1, id: 'competitor1' as const },
+    { data: competitor2, id: 'competitor2' as const }
+  ];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {[competitor1, competitor2].map((competitor, index) => (
+      {competitors.map((competitor, index) => (
         <Card key={index} className="karate-card">
           <CardHeader>
-            <CardTitle className="text-lg">{competitor.name}</CardTitle>
+            <CardTitle className="text-lg">{competitor.data.name}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-bold">{competitor.score}</span>
+                <span className="text-2xl font-bold">{competitor.data.score}</span>
                 <div className="space-x-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => updateScore(`competitor${index + 1}` as const, 'score', 1)}
+                    onClick={() => updateScore(competitor.id, 'score', 1)}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => updateScore(`competitor${index + 1}` as const, 'score', -1)}
+                    onClick={() => updateScore(competitor.id, 'score', -1)}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
@@ -78,19 +83,19 @@ const ScoringPanel: React.FC<ScoringPanelProps> = ({ matchId, onScoreUpdate }) =
               </div>
               
               <div className="flex items-center justify-between">
-                <span>Penalties: {competitor.penalties}</span>
+                <span>Penalties: {competitor.data.penalties}</span>
                 <div className="space-x-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => updateScore(`competitor${index + 1}` as const, 'penalties', 1)}
+                    onClick={() => updateScore(competitor.id, 'penalties', 1)}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => updateScore(`competitor${index + 1}` as const, 'penalties', -1)}
+                    onClick={() => updateScore(competitor.id, 'penalties', -1)}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
