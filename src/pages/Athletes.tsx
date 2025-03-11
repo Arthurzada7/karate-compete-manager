@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   Card, CardContent, CardDescription, CardHeader, CardTitle 
@@ -270,132 +269,175 @@ const Athletes = () => {
         </Button>
       </div>
 
-      <Card className="karate-card">
-        <CardHeader className="pb-3">
-          <CardTitle>Athletes Registry</CardTitle>
-          <CardDescription>
-            View and manage all registered athletes
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              <Input
-                placeholder="Search athletes, dojos, or countries..."
-                className="pl-10"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Summary Cards */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Athletes</CardTitle>
+            <CardDescription>Current tournament registration</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-4">
+              <div className="text-4xl font-bold text-karate-black">
+                {athletes.length}
+              </div>
+              <div className="space-y-1">
+                <div className="text-sm text-karate-gray">
+                  Active Participants
+                </div>
+                <div className="flex gap-2">
+                  <Badge variant="outline">{athletes.filter(a => a.gender === "Male").length} Male</Badge>
+                  <Badge variant="outline">{athletes.filter(a => a.gender === "Female").length} Female</Badge>
+                </div>
+              </div>
             </div>
-            
-            <div className="flex gap-2">
-              <Select value={filterBelt} onValueChange={(value) => setFilterBelt(value)}>
-                <SelectTrigger className="w-[180px]">
-                  <div className="flex items-center gap-2">
-                    <Filter size={16} />
-                    <SelectValue placeholder="Filter by belt" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="">All Belts</SelectItem>
-                  {beltOptions.map(belt => (
-                    <SelectItem key={belt} value={belt}>{belt}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              <Button variant="outline" className="flex items-center gap-2">
-                <Download size={16} />
-                <span className="hidden sm:inline">Export</span>
-              </Button>
-            </div>
-          </div>
+          </CardContent>
+        </Card>
 
-          <div className="rounded-md border overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-muted/50">
-                  <TableHead>Name</TableHead>
-                  <TableHead>Age</TableHead>
-                  <TableHead>Belt</TableHead>
-                  <TableHead className="hidden md:table-cell">Weight</TableHead>
-                  <TableHead className="hidden md:table-cell">Dojo</TableHead>
-                  <TableHead className="hidden lg:table-cell">Country</TableHead>
-                  <TableHead className="hidden lg:table-cell">Categories</TableHead>
-                  <TableHead className="w-[80px]">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredAthletes.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8 text-karate-gray">
-                      No athletes found matching your search criteria
-                    </TableCell>
+        <Card>
+          <CardHeader>
+            <CardTitle>Weight Classes</CardTitle>
+            <CardDescription>Distribution by category</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-2">
+              {Array.from(new Set(athletes.map(a => a.categories.filter(c => c.includes("Kumite"))).flat())).map(category => (
+                <Badge key={category} variant="secondary">
+                  {category}
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Athletes Registry Card */}
+        <Card className="md:col-span-2">
+          <CardHeader className="pb-3">
+            <CardTitle>Athletes Registry</CardTitle>
+            <CardDescription>
+              View and manage all registered athletes
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                <Input
+                  placeholder="Search athletes, dojos, or countries..."
+                  className="pl-10"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              
+              <div className="flex gap-2">
+                <Select value={filterBelt} onValueChange={(value) => setFilterBelt(value)}>
+                  <SelectTrigger className="w-[180px]">
+                    <div className="flex items-center gap-2">
+                      <Filter size={16} />
+                      <SelectValue placeholder="Filter by belt" />
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">All Belts</SelectItem>
+                    {beltOptions.map(belt => (
+                      <SelectItem key={belt} value={belt}>{belt}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Download size={16} />
+                  <span className="hidden sm:inline">Export</span>
+                </Button>
+              </div>
+            </div>
+
+            <div className="rounded-md border overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead>Name</TableHead>
+                    <TableHead>Age</TableHead>
+                    <TableHead>Belt</TableHead>
+                    <TableHead className="hidden md:table-cell">Weight</TableHead>
+                    <TableHead className="hidden md:table-cell">Dojo</TableHead>
+                    <TableHead className="hidden lg:table-cell">Country</TableHead>
+                    <TableHead className="hidden lg:table-cell">Categories</TableHead>
+                    <TableHead className="w-[80px]">Actions</TableHead>
                   </TableRow>
-                ) : (
-                  filteredAthletes.map((athlete) => (
-                    <TableRow key={athlete.id}>
-                      <TableCell className="font-medium">{athlete.name}</TableCell>
-                      <TableCell>{athlete.age}</TableCell>
-                      <TableCell>
-                        <Badge 
-                          variant="outline" 
-                          className={`${
-                            athlete.belt === "Black" 
-                              ? "border-black bg-black text-white" 
-                              : athlete.belt === "Brown" 
-                                ? "border-amber-700 bg-amber-700 text-white"
-                                : athlete.belt === "White"
-                                  ? "border-gray-200 bg-gray-200"
-                                  : "border-blue-500 bg-blue-500 text-white"
-                          }`}
-                        >
-                          {athlete.belt}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">{athlete.weight} kg</TableCell>
-                      <TableCell className="hidden md:table-cell">{athlete.dojo}</TableCell>
-                      <TableCell className="hidden lg:table-cell">{athlete.country}</TableCell>
-                      <TableCell className="hidden lg:table-cell">
-                        <div className="flex flex-wrap gap-1">
-                          {athlete.categories.map(category => (
-                            <Badge key={category} variant="secondary" className="text-xs">
-                              {category}
-                            </Badge>
-                          ))}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                              <MoreHorizontal size={16} />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem className="flex items-center gap-2">
-                              <Edit size={16} />
-                              <span>Edit</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem 
-                              className="flex items-center gap-2 text-destructive focus:text-destructive"
-                              onClick={() => handleDeleteAthlete(athlete.id)}
-                            >
-                              <Trash2 size={16} />
-                              <span>Delete</span>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                </TableHeader>
+                <TableBody>
+                  {filteredAthletes.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={8} className="text-center py-8 text-karate-gray">
+                        No athletes found matching your search criteria
                       </TableCell>
                     </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
+                  ) : (
+                    filteredAthletes.map((athlete) => (
+                      <TableRow key={athlete.id}>
+                        <TableCell className="font-medium">{athlete.name}</TableCell>
+                        <TableCell>{athlete.age}</TableCell>
+                        <TableCell>
+                          <Badge 
+                            variant="outline" 
+                            className={`${
+                              athlete.belt === "Black" 
+                                ? "border-black bg-black text-white" 
+                                : athlete.belt === "Brown" 
+                                  ? "border-amber-700 bg-amber-700 text-white"
+                                  : athlete.belt === "White"
+                                    ? "border-gray-200 bg-gray-200"
+                                    : "border-blue-500 bg-blue-500 text-white"
+                            }`}
+                          >
+                            {athlete.belt}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">{athlete.weight} kg</TableCell>
+                        <TableCell className="hidden md:table-cell">{athlete.dojo}</TableCell>
+                        <TableCell className="hidden lg:table-cell">{athlete.country}</TableCell>
+                        <TableCell className="hidden lg:table-cell">
+                          <div className="flex flex-wrap gap-1">
+                            {athlete.categories.map(category => (
+                              <Badge key={category} variant="secondary" className="text-xs">
+                                {category}
+                              </Badge>
+                            ))}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <MoreHorizontal size={16} />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem className="flex items-center gap-2">
+                                <Edit size={16} />
+                                <span>Edit</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                className="flex items-center gap-2 text-destructive focus:text-destructive"
+                                onClick={() => handleDeleteAthlete(athlete.id)}
+                              >
+                                <Trash2 size={16} />
+                                <span>Delete</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Add Athlete Dialog */}
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
