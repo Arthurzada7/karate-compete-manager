@@ -339,7 +339,7 @@ const Athletes = () => {
                     </div>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Belts</SelectItem>
+                    <SelectItem value="all">All Belts</SelectItem>
                     {beltOptions.map(belt => (
                       <SelectItem key={belt} value={belt}>{belt}</SelectItem>
                     ))}
