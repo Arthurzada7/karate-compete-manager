@@ -72,9 +72,16 @@ const Login = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Left side - Background with logo and tagline */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-karate-black to-karate-dark-gray text-white p-12 flex-col justify-center">
-        <div className="max-w-md mx-auto">
+      {/* Left side - Background with karate theme and logo/tagline */}
+      <div 
+        className="hidden lg:flex lg:w-1/2 bg-karate-dark-gray text-white p-12 flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2671&q=80')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="max-w-md mx-auto relative z-10">
           <h1 className="text-5xl font-bold mb-4">Karate Master</h1>
           <p className="text-xl mb-10 opacity-90">
             Empower your dojo with our modern tournament management system designed for martial arts excellence
@@ -85,6 +92,8 @@ const Login = () => {
             <div className="w-6 h-1 bg-karate-red opacity-40 rounded"></div>
           </div>
         </div>
+        {/* Decorative elements */}
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/50 to-transparent"></div>
       </div>
 
       {/* Right side - Login form */}
