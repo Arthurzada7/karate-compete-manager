@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
+import { User, Lock } from "lucide-react";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -71,87 +71,96 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-karate-light-gray to-white flex flex-col lg:flex-row">
-      {/* Left side - Background and brand message */}
-      <div className="w-full lg:w-2/3 bg-karate-black relative hidden lg:block">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80')",
-            opacity: 0.7,
-          }}
-        ></div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Karate Competition Manager</h1>
-          <p className="text-xl opacity-90 text-center max-w-2xl">
-            Sistema profissional de gerenciamento de torneios para o dojo moderno
+    <div className="flex min-h-screen">
+      {/* Left side - Background with logo and tagline */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-karate-black to-karate-dark-gray text-white p-12 flex-col justify-center">
+        <div className="max-w-md mx-auto">
+          <h1 className="text-5xl font-bold mb-4">Karate Master</h1>
+          <p className="text-xl mb-10 opacity-90">
+            Empower your dojo with our modern tournament management system designed for martial arts excellence
           </p>
+          <div className="flex space-x-3 mt-8">
+            <div className="w-20 h-1 bg-karate-red rounded"></div>
+            <div className="w-10 h-1 bg-karate-red opacity-70 rounded"></div>
+            <div className="w-6 h-1 bg-karate-red opacity-40 rounded"></div>
+          </div>
         </div>
       </div>
 
       {/* Right side - Login form */}
-      <div className="w-full lg:w-1/3 flex items-center justify-center p-6">
-        <div className="w-full max-w-md space-y-8 animate-fade-in">
-          {/* Logo Section */}
-          <div className="flex flex-col items-center justify-center">
-            <div className="w-48 h-48 mb-4 flex items-center justify-center">
-              {/* This is where you'll place your MeuDojo logo */}
-              <div className="w-40 h-40 rounded-full bg-gradient-to-br from-karate-red to-karate-red/70 flex items-center justify-center text-white font-bold text-3xl p-4 shadow-lg">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 bg-white">
+        <div className="w-full max-w-md space-y-8">
+          {/* Logo */}
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-karate-red to-karate-red/80 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
                 MeuDojo
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-karate-dark-gray">Acesse sua conta</h2>
-            <p className="text-karate-gray text-sm mt-1">Entre com suas credenciais para continuar</p>
+          </div>
+
+          {/* Welcome Text */}
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-karate-dark-gray">Welcome Back</h2>
+            <p className="text-karate-gray mt-2">Enter your credentials to access your account</p>
           </div>
 
           {/* Login Form */}
-          <Card className="border-none shadow-lg">
-            <CardContent className="pt-6">
-              <form onSubmit={handleLogin} className="space-y-5">
-                <div className="space-y-2">
-                  <Label htmlFor="username" className="text-karate-dark-gray">
-                    Usuário
-                  </Label>
-                  <Input
-                    id="username"
-                    type="text"
-                    placeholder="Digite seu usuário"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="border-karate-gray/30 focus-visible:ring-karate-red"
-                    required
-                  />
+          <form onSubmit={handleLogin} className="space-y-6 mt-8">
+            <div className="space-y-2">
+              <Label htmlFor="username" className="text-karate-dark-gray">
+                Username
+              </Label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-karate-gray" />
                 </div>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="Enter your username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="pl-10 border-karate-gray/30 focus-visible:ring-karate-red"
+                  required
+                />
+              </div>
+            </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="password" className="text-karate-dark-gray">
-                    Senha
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Digite sua senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="border-karate-gray/30 focus-visible:ring-karate-red"
-                    required
-                  />
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <Label htmlFor="password" className="text-karate-dark-gray">
+                  Password
+                </Label>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-karate-gray" />
                 </div>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="pl-10 border-karate-gray/30 focus-visible:ring-karate-red"
+                  required
+                />
+              </div>
+            </div>
 
-                <Button
-                  type="submit"
-                  className="w-full bg-karate-red hover:bg-karate-red/90 text-white font-medium py-2 transition-all"
-                  disabled={isLoggingIn}
-                >
-                  {isLoggingIn ? "Entrando..." : "Entrar"}
-                </Button>
+            <Button
+              type="submit"
+              className="w-full bg-gradient-to-r from-orange-500 to-karate-red hover:from-orange-600 hover:to-karate-red/90 text-white font-medium py-3 h-12 rounded-full transition-all"
+              disabled={isLoggingIn}
+            >
+              {isLoggingIn ? "Signing in..." : "Sign in"}
+            </Button>
 
-                <div className="text-center text-sm text-karate-gray mt-4">
-                  <p>Credenciais de demonstração: admin / karate2024</p>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+            <div className="text-center text-sm text-karate-gray mt-4">
+              <p>Demo credentials: admin / karate2024</p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
