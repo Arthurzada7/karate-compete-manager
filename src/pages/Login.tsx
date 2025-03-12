@@ -74,14 +74,14 @@ const Login = () => {
     <div className="flex min-h-screen">
       {/* Left side - Background with karate theme and logo/tagline */}
       <div 
-        className="hidden lg:flex lg:w-1/2 bg-karate-dark-gray text-white p-12 flex-col justify-center relative overflow-hidden"
+        className="hidden lg:flex lg:w-3/5 bg-karate-dark-gray text-white flex-col justify-end relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2671&q=80')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2671&q=80')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        <div className="max-w-md mx-auto relative z-10">
+        <div className="max-w-md mx-auto p-12 relative z-10">
           <h1 className="text-5xl font-bold mb-4">Karate Master</h1>
           <p className="text-xl mb-10 opacity-90">
             Empower your dojo with our modern tournament management system designed for martial arts excellence
@@ -93,11 +93,11 @@ const Login = () => {
           </div>
         </div>
         {/* Decorative elements */}
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
       </div>
 
       {/* Right side - Login form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 bg-white">
+      <div className="w-full lg:w-2/5 flex items-center justify-center p-6 bg-white">
         <div className="w-full max-w-md space-y-8">
           {/* Logo */}
           <div className="text-center">
