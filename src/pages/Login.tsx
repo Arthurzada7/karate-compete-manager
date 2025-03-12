@@ -74,19 +74,19 @@ const Login = () => {
     <div className="flex min-h-screen">
       {/* Left side - Background with karate theme and logo/tagline */}
       <div 
-        className="hidden lg:flex lg:w-3/5 bg-karate-dark-gray text-white flex-col justify-end relative overflow-hidden"
+        className="hidden lg:flex lg:w-3/5 bg-karate-dark-gray text-white flex-col justify-center items-center relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2671&q=80')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1594381898411-846e7d193883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        <div className="max-w-md mx-auto p-12 relative z-10">
+        <div className="max-w-md text-center p-12 relative z-10 animate-fade-in">
           <h1 className="text-5xl font-bold mb-4">Karate Master</h1>
           <p className="text-xl mb-10 opacity-90">
             Empower your dojo with our modern tournament management system designed for martial arts excellence
           </p>
-          <div className="flex space-x-3 mt-8">
+          <div className="flex justify-center space-x-3 mt-8">
             <div className="w-20 h-1 bg-karate-red rounded"></div>
             <div className="w-10 h-1 bg-karate-red opacity-70 rounded"></div>
             <div className="w-6 h-1 bg-karate-red opacity-40 rounded"></div>
@@ -130,7 +130,7 @@ const Login = () => {
                   placeholder="Enter your username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="pl-10 border-karate-gray/30 focus-visible:ring-karate-red"
+                  className="pl-10 border-karate-gray/30 focus-visible:ring-karate-red rounded-xl"
                   required
                 />
               </div>
@@ -152,7 +152,7 @@ const Login = () => {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 border-karate-gray/30 focus-visible:ring-karate-red"
+                  className="pl-10 border-karate-gray/30 focus-visible:ring-karate-red rounded-xl"
                   required
                 />
               </div>
